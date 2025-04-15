@@ -13,7 +13,7 @@ namespace pryGestionInventario
     internal class clsConexionBD
     {
         //cadena de conexion
-        string cadena = "Server = localhost\\SQLEXPRESS;Database=Ventas2;Trusted_Connection=True;";
+        string cadena = "Server = localhost\\SQLEXPRESS;Database=Comercio;Trusted_Connection=True;";
 
         //"Server=localhost;Database=Ventas2;Trusted_Connection=True;";//
 
@@ -35,13 +35,14 @@ namespace pryGestionInventario
                 nombreBaseDeDatos = conexion.Database;
 
                 conexion.Open();
-                
-                MessageBox.Show("Conectado a " + nombreBaseDeDatos);
+
+                MessageBox.Show("Conectado a la base de datos: '" + nombreBaseDeDatos + "'.", "Conexión exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception error)
             {
-                MessageBox.Show("Tiene un errorcito - " + error.Message);
-            }     
+                MessageBox.Show("Ups... algo salió mal al intentar conectar con la base de datos. Por favor, revise su conexión e intente nuevamente.", "Conexión fallida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -50,31 +51,24 @@ namespace pryGestionInventario
         {
             try
             {
-                using (SqlConnection conexion = new SqlConnection(cadena))
+                using (SqlConnection conexion = new SqlConnection (cadena))
                 {
-                    string consulta = "SELECT * FROM Contactos";
-                    SqlCommand comando = new SqlCommand(consulta, conexion);
-                    SqlDataAdapter adaptador = new SqlDataAdapter(comando);
-                    DataTable tabla = new DataTable();
-
                     conexion.Open();
-                    adaptador.Fill(tabla);
+                    string query = "SELECT * FROM Productos";
+                    SqlCommand comando = new SqlCommand(query,conexion);
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comando);
 
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
                     Grilla.DataSource = tabla;
                 }
 
             }
             catch (Exception error)
             {
-                MessageBox.Show("Error: " + error.Message);
+                MessageBox.Show("No se pudieron cargar los productos correctamente. Revise su conexión o intente más tarde.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                if (conexion.State == ConnectionState.Open)
-                {
-                    conexion.Close();
-                }
-            }
+           
         }
         
     }

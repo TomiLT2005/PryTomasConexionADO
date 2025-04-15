@@ -248,7 +248,7 @@
             this.Controls.Add(this.mrcProducto);
             this.Name = "frmInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Conexion SQL";
+            this.Text = "Tienda de Productos";
             this.Load += new System.EventHandler(this.frmInicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.mrcProducto.ResumeLayout(false);
