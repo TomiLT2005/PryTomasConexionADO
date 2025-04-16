@@ -70,6 +70,32 @@ namespace pryGestionInventario
             }
            
         }
+
+        public void Cargarcategorias(ComboBox Combo)
+        {
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadena))
+                {
+                    conexion.Open();
+                    string query = "SELECT Id, Nombre FROM Categorias";
+                    SqlCommand comando = new SqlCommand(query, conexion);
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
+
+                    Combo.DataSource = tabla;
+                    Combo.DisplayMember = "Nombre";
+                    Combo.ValueMember = "Id";
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error al cargar categorías: " + error.Message);
+            }
+        }
         
     }
 }
