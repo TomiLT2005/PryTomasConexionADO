@@ -97,5 +97,6 @@ namespace pryGestionInventario
             }
         }
         
+        ///Nuevos Metodos///
     }
 }
