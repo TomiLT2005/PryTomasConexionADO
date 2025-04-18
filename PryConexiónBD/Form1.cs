@@ -24,6 +24,7 @@ namespace PryConexiónBD
             conexion.ConectarBD();
 
             conexion.MostrarBD(dgvDatos);
+            conexion.Cargarcategorias(cmbCategoria);
         }
     }
 }
