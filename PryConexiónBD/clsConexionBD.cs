@@ -7,6 +7,7 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
+using PryConexiónBD;
 
 namespace pryGestionInventario
 {
@@ -47,7 +48,7 @@ namespace pryGestionInventario
         }
 
 
-        public void MostrarBD(DataGridView Grilla)
+        public void ListarBD(DataGridView Grilla)
         {
             try
             {
@@ -55,6 +56,7 @@ namespace pryGestionInventario
                 {
                     conexion.Open();
                     string query = "SELECT * FROM Productos";
+
                     SqlCommand comando = new SqlCommand(query,conexion);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comando);
 
@@ -79,6 +81,7 @@ namespace pryGestionInventario
                 {
                     conexion.Open();
                     string query = "SELECT Id, Nombre FROM Categorias";
+
                     SqlCommand comando = new SqlCommand(query, conexion);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comando);
 
@@ -96,7 +99,34 @@ namespace pryGestionInventario
                 MessageBox.Show("Error al cargar categorías: " + error.Message);
             }
         }
-        
-        ///Nuevos Metodos///
+
+        public void Agregar(clsProducto producto ) 
+        {
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadena))
+                {
+                    conexion.Open();
+                    string query = "INSERT INTO Productos (Nombre, Descripcion, Precio, Stock, CategoriaId) VALUES (@nombre, @descripcion, @precio, @stock, @categoriaId)";
+
+                    SqlCommand comando = new SqlCommand(query, conexion);
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+
+                    comando.Parameters.AddWithValue("@nombre", producto.Nombre);
+                    comando.Parameters.AddWithValue("@descripcion", producto.Descripcion);
+                    comando.Parameters.AddWithValue("@precio", producto.Precio);
+                    comando.Parameters.AddWithValue("@stock", producto.Stock);
+                    comando.Parameters.AddWithValue("@categoriaId", producto.CategoriaId);
+                    comando.ExecuteNonQuery();
+
+                    MessageBox.Show("Producto agregado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error al agregar producto: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
