@@ -38,6 +38,12 @@ namespace PryConexiónBD
             txtNombre.Focus();
         }
 
+        //Evento para salir del Sistema//
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
         //Controles - Ingreso de Datos//
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -72,7 +78,6 @@ namespace PryConexiónBD
         //Eventos de Botones (Agregar,Modificar, Eliminar)//
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-          
             string Nombre = txtNombre.Text;
             string Descripcion = txtDesc.Text;
             decimal Precio = Convert.ToDecimal(txtPrecio.Text);
@@ -80,7 +85,7 @@ namespace PryConexiónBD
             int CategoriaId = Convert.ToInt32(cmbCategoria.SelectedValue);
 
 
-            clsProducto nuevoproducto = new clsProducto(Nombre, Descripcion, Precio, Stock, CategoriaId);
+            clsProducto nuevoproducto = new clsProducto(0,Nombre, Descripcion, Precio, Stock, CategoriaId);
 
             conexion.Agregar(nuevoproducto);
             conexion.ListarBD(dgvDatos);
@@ -93,34 +98,11 @@ namespace PryConexiónBD
 
             btnModificar.Enabled = true;
             btnEliminar.Enabled = true;
-             
         }
 
-        private void txtNombre_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
-            {
-                MessageBox.Show("El producto necesita un Nombre. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNombre.Focus(); 
-            }
-        }
+        //Me faltaría realizar dgvDatos_CellClick//
+        // Programar el botón de Modificar//
+        // Programar el botón de Eliminar//
 
-        private void txtDesc_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
-            {
-                MessageBox.Show("El producto necesita una Descripción. Por favor, ingrese un valor.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNombre.Focus();
-            }
-        }
-
-        private void cmbCategoria_Leave(object sender, EventArgs e)
-        {
-            if (cmbCategoria.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe seleccionar una categoría para el producto. Por favor, elija una categoría de la lista.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbCategoria.Focus();
-            }
-        }
     }
 }
