@@ -22,6 +22,8 @@ namespace PryConexiónBD
         clsConexionBD conexion = new clsConexionBD();
         clsControles controles = new clsControles();
 
+        //Variable para guardar el codigo seleccionado//
+        private int codigoSeleccionado = 0;
 
         //Evento de carga del formulario//
         private void frmInicio_Load(object sender, EventArgs e)
@@ -100,9 +102,46 @@ namespace PryConexiónBD
             btnEliminar.Enabled = true;
         }
 
-        //Me faltaría realizar dgvDatos_CellClick//
-        // Programar el botón de Modificar//
-        // Programar el botón de Eliminar//
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            clsProducto modificado = new clsProducto(
+            codigoSeleccionado,
+            txtNombre.Text,
+            txtDesc.Text,
+            Convert.ToDecimal(txtPrecio.Text),
+            Convert.ToInt32(numStock.Value),
+            Convert.ToInt32(cmbCategoria.SelectedValue));
 
+            conexion.Modificar(modificado);
+            conexion.ListarBD(dgvDatos);
+            //Faltaria el de limpiar campos//
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            btnModificar.Enabled = true;
+            btnEliminar.Enabled = true;
+        }
+
+
+        //Datos_CellClick//
+        private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvDatos.Rows[e.RowIndex];
+
+                codigoSeleccionado = Convert.ToInt32(row.Cells["Codigo"].Value);
+
+                txtNombre.Text = row.Cells["Nombre"].Value.ToString();
+                txtDesc.Text = row.Cells["Descripcion"].Value.ToString();
+                txtPrecio.Text = row.Cells["Precio"].Value.ToString();
+                numStock.Value = Convert.ToInt32(row.Cells["Stock"].Value);
+                cmbCategoria.SelectedValue = row.Cells["CategoriaId"].Value;
+            }
+        }
+
+        
     }
 }
