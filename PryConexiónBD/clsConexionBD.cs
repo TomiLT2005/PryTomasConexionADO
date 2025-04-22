@@ -130,7 +130,6 @@ namespace pryGestionInventario
         }
 
 
-        //Terminar el metodo de modificar//
         public void Modificar(clsProducto producto)
         {
             try
@@ -158,6 +157,30 @@ namespace pryGestionInventario
             catch (Exception error)
             {
                 MessageBox.Show("Error al modificar producto: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void Eliminar(int codigo) 
+        {
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadena))
+                {
+                    conexion.Open();
+                    string query = "DELETE FROM Productos WHERE Codigo = @codigo";
+
+                    SqlCommand comando = new SqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@codigo", codigo);
+
+                    comando.ExecuteNonQuery();
+                    MessageBox.Show("Producto eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error al eliminar el producto: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

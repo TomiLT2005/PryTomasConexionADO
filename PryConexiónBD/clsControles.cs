@@ -36,6 +36,14 @@ namespace PryConexiónBD
             }
         }
 
+        public void LimpiarCampos(TextBox txtNombre, TextBox txtDesc, TextBox txtPrecio, NumericUpDown numStock, ComboBox cmbCategoria)
+        {
+            txtNombre.Clear();
+            txtDesc.Clear();
+            txtPrecio.Clear();
+            numStock.Value = 0;
+            cmbCategoria.SelectedIndex = 0;
+        }
 
 
     }

@@ -23,7 +23,7 @@ namespace PryConexiónBD
         clsControles controles = new clsControles();
 
         //Variable para guardar el codigo seleccionado//
-        private int codigoSeleccionado = 0;
+        public int codigoSeleccionado = 0;
 
         //Evento de carga del formulario//
         private void frmInicio_Load(object sender, EventArgs e)
@@ -43,7 +43,13 @@ namespace PryConexiónBD
         //Evento para salir del Sistema//
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+
+            DialogResult res = MessageBox.Show("¿Estás seguro de que deseas salir?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (res == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
 
@@ -77,7 +83,7 @@ namespace PryConexiónBD
 
 
 
-        //Eventos de Botones (Agregar,Modificar, Eliminar)//
+        //Eventos de Botones (Agregar,Modificar, Eliminar y Buscar)//
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             string Nombre = txtNombre.Text;
@@ -92,11 +98,7 @@ namespace PryConexiónBD
             conexion.Agregar(nuevoproducto);
             conexion.ListarBD(dgvDatos);
 
-            txtNombre.Clear();
-            txtDesc.Clear();
-            txtPrecio.Clear();
-            numStock.Value = 0;
-            cmbCategoria.SelectedIndex = 0;
+           controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);  
 
             btnModificar.Enabled = true;
             btnEliminar.Enabled = true;
@@ -114,7 +116,25 @@ namespace PryConexiónBD
 
             conexion.Modificar(modificado);
             conexion.ListarBD(dgvDatos);
-            //Faltaria el de limpiar campos//
+
+            
+            controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+            codigoSeleccionado = 0; 
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("¿Estás seguro de que deseas eliminar este producto?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (res == DialogResult.Yes)
+            {
+                conexion.Eliminar(codigoSeleccionado);
+                conexion.ListarBD(dgvDatos);
+
+                controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+                codigoSeleccionado = 0;
+            }
 
         }
 
@@ -125,20 +145,20 @@ namespace PryConexiónBD
         }
 
 
-        //Datos_CellClick//
-        private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs e)
+        //Evento obtener datos de la fila//
+        private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs f)
         {
-            if (e.RowIndex >= 0)
+            if (f.RowIndex >= 0)
             {
-                DataGridViewRow row = dgvDatos.Rows[e.RowIndex];
+                DataGridViewRow fila = dgvDatos.Rows[f.RowIndex];
 
-                codigoSeleccionado = Convert.ToInt32(row.Cells["Codigo"].Value);
+                codigoSeleccionado = Convert.ToInt32(fila.Cells["Codigo"].Value);
 
-                txtNombre.Text = row.Cells["Nombre"].Value.ToString();
-                txtDesc.Text = row.Cells["Descripcion"].Value.ToString();
-                txtPrecio.Text = row.Cells["Precio"].Value.ToString();
-                numStock.Value = Convert.ToInt32(row.Cells["Stock"].Value);
-                cmbCategoria.SelectedValue = row.Cells["CategoriaId"].Value;
+                txtNombre.Text = fila.Cells["Nombre"].Value.ToString();
+                txtDesc.Text = fila.Cells["Descripcion"].Value.ToString();
+                txtPrecio.Text = fila.Cells["Precio"].Value.ToString();
+                numStock.Value = Convert.ToInt32(fila.Cells["Stock"].Value);
+                cmbCategoria.SelectedValue = fila.Cells["CategoriaId"].Value;
             }
         }
 
