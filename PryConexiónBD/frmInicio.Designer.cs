@@ -99,6 +99,7 @@
             // 
             this.btnEliminar.Enabled = false;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Image = global::PryConexiónBD.Properties.Resources.imgEliminar;
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminar.Location = new System.Drawing.Point(19, 462);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
@@ -113,6 +114,7 @@
             // 
             this.btnModificar.Enabled = false;
             this.btnModificar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.Image = global::PryConexiónBD.Properties.Resources.ImgModificar;
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnModificar.Location = new System.Drawing.Point(19, 411);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
@@ -250,11 +252,13 @@
             // 
             this.homeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salirToolStripMenuItem});
+            this.homeToolStripMenuItem.Image = global::PryConexiónBD.Properties.Resources.imgHome;
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
             // 
             // salirToolStripMenuItem
             // 
+            this.salirToolStripMenuItem.Image = global::PryConexiónBD.Properties.Resources.imgSalir;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
@@ -275,6 +279,7 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Image = global::PryConexiónBD.Properties.Resources.ImgBuscar;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(215, 20);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
@@ -296,20 +301,24 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Salmon;
+            this.btnCancelar.Image = global::PryConexiónBD.Properties.Resources.imgCancelar;
             this.btnCancelar.Location = new System.Drawing.Point(756, 65);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(55, 45);
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnVolver
             // 
             this.btnVolver.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnVolver.Image = global::PryConexiónBD.Properties.Resources.imgVolver;
             this.btnVolver.Location = new System.Drawing.Point(695, 65);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(55, 45);
             this.btnVolver.TabIndex = 9;
             this.btnVolver.UseVisualStyleBackColor = false;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // frmInicio
             // 

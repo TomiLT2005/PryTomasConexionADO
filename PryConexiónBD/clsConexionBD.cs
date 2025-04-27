@@ -200,8 +200,14 @@ namespace pryGestionInventario
                     DataTable tabla = new DataTable();
                     adaptador.Fill(tabla);
 
-                    Grilla.DataSource = tabla;
-
+                    if (tabla.Rows.Count == 0)
+                    {
+                        MessageBox.Show("No se encontró el producto", "Resultado de búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        Grilla.DataSource = tabla; 
+                    }
                 }
             }
             catch (Exception error)

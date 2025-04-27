@@ -144,6 +144,21 @@ namespace PryConexiónBD
         {
             string busqueda = txtBuscar.Text;
             conexion.BuscarporNombre(dgvDatos, busqueda);
+
+            txtBuscar.Clear();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            conexion.ListarBD(dgvDatos);
+            controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
         }
 
 
