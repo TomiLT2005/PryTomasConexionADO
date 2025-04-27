@@ -22,8 +22,10 @@ namespace PryConexiónBD
         clsConexionBD conexion = new clsConexionBD();
         clsControles controles = new clsControles();
 
+
         //Variable para guardar el codigo seleccionado//
         public int codigoSeleccionado = 0;
+
 
         //Evento de carga del formulario//
         private void frmInicio_Load(object sender, EventArgs e)
@@ -140,12 +142,11 @@ namespace PryConexiónBD
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            btnModificar.Enabled = true;
-            btnEliminar.Enabled = true;
+            string busqueda = txtBuscar.Text;
+            conexion.BuscarporNombre(dgvDatos, busqueda);
         }
 
 
-        //Evento obtener datos de la fila//
         private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs f)
         {
             if (f.RowIndex >= 0)
@@ -159,6 +160,9 @@ namespace PryConexiónBD
                 txtPrecio.Text = fila.Cells["Precio"].Value.ToString();
                 numStock.Value = Convert.ToInt32(fila.Cells["Stock"].Value);
                 cmbCategoria.SelectedValue = fila.Cells["CategoriaId"].Value;
+
+                btnModificar.Enabled = true;
+                btnEliminar.Enabled = true;
             }
         }
 

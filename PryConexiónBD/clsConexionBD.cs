@@ -183,5 +183,31 @@ namespace pryGestionInventario
                 MessageBox.Show("Error al eliminar el producto: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public void BuscarporNombre(DataGridView Grilla, string nombreProducto) 
+        {
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadena)) 
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Productos WHERE Nombre LIKE @nombre";
+                    SqlCommand comando = new SqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@nombre", "%" + nombreProducto + "%");
+
+
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
+
+                    Grilla.DataSource = tabla;
+
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error al buscar productos: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

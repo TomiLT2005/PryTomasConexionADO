@@ -64,16 +64,16 @@
     <Compile Include="clsConexionBD.cs" />
     <Compile Include="clsControles.cs" />
     <Compile Include="clsProducto.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="frmInicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmInicio.Designer.cs">
+      <DependentUpon>frmInicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmInicio.resx">
+      <DependentUpon>frmInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -112,6 +112,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\imgSalir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgEliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgBuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgModificar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgCancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imgVolver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImgAgregar.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\imgHome.png" />
