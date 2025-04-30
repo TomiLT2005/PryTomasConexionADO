@@ -88,22 +88,29 @@ namespace PryConexiónBD
         //Eventos de Botones (Agregar,Modificar, Eliminar y Buscar)//
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            string Nombre = txtNombre.Text;
-            string Descripcion = txtDesc.Text;
-            decimal Precio = Convert.ToDecimal(txtPrecio.Text);
-            int Stock = Convert.ToInt32(numStock.Value);
-            int CategoriaId = Convert.ToInt32(cmbCategoria.SelectedValue);
+            if (!ValidarCampos())
+            {
+                return; // Si la validación falla, no hacemos nada más
+            }
+            else 
+            {
+                string Nombre = txtNombre.Text;
+                string Descripcion = txtDesc.Text;
+                decimal Precio = Convert.ToDecimal(txtPrecio.Text);
+                int Stock = Convert.ToInt32(numStock.Value);
+                int CategoriaId = Convert.ToInt32(cmbCategoria.SelectedValue);
 
 
-            clsProducto nuevoproducto = new clsProducto(0,Nombre, Descripcion, Precio, Stock, CategoriaId);
+                clsProducto nuevoproducto = new clsProducto(0, Nombre, Descripcion, Precio, Stock, CategoriaId);
 
-            conexion.Agregar(nuevoproducto);
-            conexion.ListarBD(dgvDatos);
+                conexion.Agregar(nuevoproducto);
+                conexion.ListarBD(dgvDatos);
 
-           controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);  
+                controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
 
-            btnModificar.Enabled = true;
-            btnEliminar.Enabled = true;
+                btnModificar.Enabled = true;
+                btnEliminar.Enabled = true;
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -137,7 +144,6 @@ namespace PryConexiónBD
                 controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
                 codigoSeleccionado = 0;
             }
-
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -157,6 +163,10 @@ namespace PryConexiónBD
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+
+            txtNombre.Focus();
+            conexion.ListarBD(dgvDatos);
+            btnAgregar.Enabled = true;
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
         }
@@ -176,11 +186,66 @@ namespace PryConexiónBD
                 numStock.Value = Convert.ToInt32(fila.Cells["Stock"].Value);
                 cmbCategoria.SelectedValue = fila.Cells["CategoriaId"].Value;
 
+                btnAgregar.Enabled = false;
                 btnModificar.Enabled = true;
                 btnEliminar.Enabled = true;
             }
         }
 
-        
+        //-------------------------------------------------*
+
+        private bool ValidarCampos()
+        {
+            // Validación del campo Nombre
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("El campo Nombre es obligatorio.");
+                txtNombre.Focus();
+                return false; // Detenemos el flujo si hay un error
+            }
+
+            // Validación del campo Descripción
+            if (string.IsNullOrWhiteSpace(txtDesc.Text))
+            {
+                MessageBox.Show("El campo Descripción es obligatorio.");
+                txtDesc.Focus();
+                return false; // Detenemos el flujo si hay un error
+            }
+
+            // Validación del campo Precio
+            if (string.IsNullOrWhiteSpace(txtPrecio.Text))
+            {
+                MessageBox.Show("El campo Precio es obligatorio.");
+                txtPrecio.Focus();
+                return false; // Detenemos el flujo si hay un error
+            }
+
+            if (!decimal.TryParse(txtPrecio.Text, out _)) // Verifica que sea un número válido
+            {
+                MessageBox.Show("El campo Precio debe ser un número válido.");
+                txtPrecio.Focus();
+                return false; // Detenemos el flujo si hay un error
+            }
+
+            // Validación del campo Stock
+            if (numStock.Value == 0)
+            {
+                MessageBox.Show("Debe ingresar un stock mayor a 0.");
+                numStock.Focus();
+                return false; // Detenemos el flujo si hay un error
+            }
+
+            // Validación del campo Categoría
+            if (cmbCategoria.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar una categoría.");
+                cmbCategoria.Focus();
+                return false; // Detenemos el flujo si hay un error
+            }
+
+            return true; // Todos los campos están completos
+        }
+
+
     }
 }
