@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicio));
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.mrcProducto = new System.Windows.Forms.GroupBox();
@@ -52,11 +53,13 @@
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.epValidacion = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.mrcProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.mrcBuscar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epValidacion)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvDatos
@@ -321,6 +324,10 @@
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // epValidacion
+            // 
+            this.epValidacion.ContainerControl = this;
+            // 
             // frmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -349,6 +356,7 @@
             this.menuStrip1.PerformLayout();
             this.mrcBuscar.ResumeLayout(false);
             this.mrcBuscar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.epValidacion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,6 +387,7 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.ErrorProvider epValidacion;
     }
 }
 

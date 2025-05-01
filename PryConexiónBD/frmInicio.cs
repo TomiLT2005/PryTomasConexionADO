@@ -55,44 +55,11 @@ namespace PryConexiónBD
         }
 
 
-        //Controles - Ingreso de Datos//
-        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("Solo se permiten letras");
-            }
-        }
-
-        private void txtDesc_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("Solo se permiten letras");
-            }
-        }
-
-        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-                MessageBox.Show("Solo se permiten números.");
-            }
-        }
-
-
 
         //Eventos de Botones (Agregar,Modificar, Eliminar y Buscar)//
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos())
-            {
-                return; // Si la validación falla, no hacemos nada más
-            }
-            else 
+            if (validarCampos()) 
             {
                 string Nombre = txtNombre.Text;
                 string Descripcion = txtDesc.Text;
@@ -111,6 +78,12 @@ namespace PryConexiónBD
                 btnModificar.Enabled = true;
                 btnEliminar.Enabled = true;
             }
+            else
+            {
+                MessageBox.Show("Por favor, complete todos los campos requeridos.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -194,56 +167,79 @@ namespace PryConexiónBD
 
         //-------------------------------------------------*
 
-        private bool ValidarCampos()
+
+        //Controles - Ingreso de Datos//
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Validación del campo Nombre
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Solo se permiten letras");
+            }
+        }
+
+        private void txtDesc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Solo se permiten letras");
+            }
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Solo se permiten números.");
+            }
+        }
+
+
+
+        private bool validarCampos()
+        {
+            bool error = false;
+            epValidacion.Clear();
+
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                MessageBox.Show("El campo Nombre es obligatorio.");
+                epValidacion.SetError(txtNombre, "El Producto necesita un Nombre");
                 txtNombre.Focus();
-                return false; // Detenemos el flujo si hay un error
+                return false;
             }
 
-            // Validación del campo Descripción
             if (string.IsNullOrWhiteSpace(txtDesc.Text))
             {
-                MessageBox.Show("El campo Descripción es obligatorio.");
+                epValidacion.SetError(txtDesc, "El Producto necesita una Descripción");
                 txtDesc.Focus();
-                return false; // Detenemos el flujo si hay un error
+                return false;
             }
 
-            // Validación del campo Precio
             if (string.IsNullOrWhiteSpace(txtPrecio.Text))
             {
-                MessageBox.Show("El campo Precio es obligatorio.");
+                epValidacion.SetError(txtPrecio, "El Producto necesita un Precio");
                 txtPrecio.Focus();
-                return false; // Detenemos el flujo si hay un error
+                return false;
             }
 
-            if (!decimal.TryParse(txtPrecio.Text, out _)) // Verifica que sea un número válido
-            {
-                MessageBox.Show("El campo Precio debe ser un número válido.");
-                txtPrecio.Focus();
-                return false; // Detenemos el flujo si hay un error
-            }
-
-            // Validación del campo Stock
             if (numStock.Value == 0)
             {
-                MessageBox.Show("Debe ingresar un stock mayor a 0.");
+                epValidacion.SetError(numStock, "Debe haber al menos un Producto en stock");
                 numStock.Focus();
-                return false; // Detenemos el flujo si hay un error
+                return false;
             }
 
-            // Validación del campo Categoría
             if (cmbCategoria.SelectedIndex == -1)
             {
-                MessageBox.Show("Debe seleccionar una categoría.");
+                epValidacion.SetError(cmbCategoria, "El Producto necesita una Categoría");
                 cmbCategoria.Focus();
-                return false; // Detenemos el flujo si hay un error
+                return false;
             }
 
-            return true; // Todos los campos están completos
+            return true;
+
         }
 
 
