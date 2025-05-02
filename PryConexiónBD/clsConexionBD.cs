@@ -214,6 +214,8 @@ namespace pryGestionInventario
             {
                 MessageBox.Show("Error al buscar productos: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            //PRUEBA//
         }
     }
 }
