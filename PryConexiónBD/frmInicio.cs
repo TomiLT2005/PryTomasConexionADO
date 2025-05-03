@@ -74,7 +74,6 @@ namespace PryConexiónBD
                 conexion.ListarBD(dgvDatos);
 
                 controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
-
                 btnModificar.Enabled = true;
                 btnEliminar.Enabled = true;
             }
@@ -82,27 +81,29 @@ namespace PryConexiónBD
             {
                 MessageBox.Show("Por favor, complete todos los campos requeridos.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
-
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            clsProducto modificado = new clsProducto(
-            codigoSeleccionado,
-            txtNombre.Text,
-            txtDesc.Text,
-            Convert.ToDecimal(txtPrecio.Text),
-            Convert.ToInt32(numStock.Value),
-            Convert.ToInt32(cmbCategoria.SelectedValue));
+            if (validarCampos()) 
+            {
+                clsProducto modificado = new clsProducto(
+                codigoSeleccionado,
+                txtNombre.Text,
+                txtDesc.Text,
+                Convert.ToDecimal(txtPrecio.Text),
+                Convert.ToInt32(numStock.Value),
+                Convert.ToInt32(cmbCategoria.SelectedValue));
+                conexion.Modificar(modificado);
+                conexion.ListarBD(dgvDatos);
 
-            conexion.Modificar(modificado);
-            conexion.ListarBD(dgvDatos);
-
-            
-            controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
-            codigoSeleccionado = 0; 
-
+                controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+                codigoSeleccionado = 0;
+            }
+            else 
+            {
+                MessageBox.Show("Por favor, complete todos los campos requeridos.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -142,6 +143,7 @@ namespace PryConexiónBD
             btnAgregar.Enabled = true;
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
+
         }
 
 
@@ -187,6 +189,15 @@ namespace PryConexiónBD
             }
         }
 
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Solo se permiten letras");
+            }
+        }
+
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -196,11 +207,10 @@ namespace PryConexiónBD
             }
         }
 
-
+     
 
         private bool validarCampos()
         {
-            bool error = false;
             epValidacion.Clear();
 
             if (string.IsNullOrWhiteSpace(txtNombre.Text))
@@ -238,10 +248,8 @@ namespace PryConexiónBD
                 return false;
             }
 
-            return true;
+            return true; //esta todo correcto//
 
         }
-
-
     }
 }
