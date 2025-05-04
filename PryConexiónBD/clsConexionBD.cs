@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
 using PryConexiónBD;
+using System.Net.NetworkInformation;
 
 namespace pryGestionInventario
 {
@@ -214,7 +215,8 @@ namespace pryGestionInventario
 
         }
 
-        public bool verificarLogin(clsUsuario usuario)
+
+        public bool verificarUsuario(clsUsuario usuario)
         {
             bool loginExitoso = false;
 
@@ -223,39 +225,28 @@ namespace pryGestionInventario
                 using (SqlConnection conexion = new SqlConnection(cadena))
                 {
                     conexion.Open();
-                    string query = "SELECT Id, EstadoId, IntentosFallidos FROM Usuarios WHERE Nombre = @Nombre AND Contraseña = @Contraseña";
+                    string query = "SELECT COUNT(*) FROM Usuarios WHERE Nombre = @Nombre AND Contraseña = @Contraseña";
 
                     SqlCommand comando = new SqlCommand(query, conexion);
                     comando.Parameters.AddWithValue("@Nombre", usuario.Nombre);
                     comando.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+                   
+                    int match = (int)comando.ExecuteScalar();
 
-                    SqlDataReader lector = comando.ExecuteReader();
-
-                    if (lector.Read())
+                    if(match > 0)
                     {
-                        usuario.Id = Convert.ToInt32(lector["Id"]);
-                        usuario.EstadoId = Convert.ToInt32(lector["EstadoId"]);
-                        usuario.IntentosFallidos = Convert.ToInt32(lector["IntentosFallidos"]);
-
-                        if (usuario.EstadoId == 1)
-                        {
-                            loginExitoso = true;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Cuenta bloqueada.");
-                            loginExitoso = false;
-                        }
+                        loginExitoso = true;
                     }
                     else
                     {
-                        MessageBox.Show("Datos Incorrectos.");
+                        MessageBox.Show("Usuario o contraseña incorrectos. Intente nuevamente.", "Error de acceso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
+
                 }
             }
             catch (Exception error)
             {
-                MessageBox.Show("Error al verificar el login: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al verificar el Usuario: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return loginExitoso;

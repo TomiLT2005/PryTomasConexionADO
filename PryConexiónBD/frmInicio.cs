@@ -13,9 +13,10 @@ namespace PryConexiónBD
 {
     public partial class frmInicio : Form
     {
-        public frmInicio()
+        public frmInicio(string nombreUsuario)
         {
             InitializeComponent();
+            lblUsuario.Text = "Hola, " + nombreUsuario + "!";
         }
 
         //Instancias de clases//

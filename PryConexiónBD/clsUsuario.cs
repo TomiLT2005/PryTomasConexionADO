@@ -12,9 +12,8 @@ namespace PryConexiónBD
         public string Nombre { get; set; }
         public string Contraseña { get; set; }
 
-        public clsUsuario(int Id, string Nombre, string Contraseña)
+        public clsUsuario(string Nombre, string Contraseña)
         {
-            this.Id = Id;
             this.Nombre = Nombre;
             this.Contraseña = Contraseña;
         }

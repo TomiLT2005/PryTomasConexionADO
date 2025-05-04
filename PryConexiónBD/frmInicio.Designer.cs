@@ -54,6 +54,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.epValidacion = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblUsuario = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.mrcProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
@@ -66,7 +67,7 @@
             // 
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDatos.Location = new System.Drawing.Point(295, 142);
+            this.dgvDatos.Location = new System.Drawing.Point(291, 172);
             this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
@@ -90,7 +91,7 @@
             this.mrcProducto.Controls.Add(this.lblDesc);
             this.mrcProducto.Controls.Add(this.txtNombre);
             this.mrcProducto.Controls.Add(this.lblNombre);
-            this.mrcProducto.Location = new System.Drawing.Point(13, 53);
+            this.mrcProducto.Location = new System.Drawing.Point(9, 83);
             this.mrcProducto.Margin = new System.Windows.Forms.Padding(4);
             this.mrcProducto.Name = "mrcProducto";
             this.mrcProducto.Padding = new System.Windows.Forms.Padding(4);
@@ -264,7 +265,7 @@
             // 
             this.salirToolStripMenuItem.Image = global::PryConexiónBD.Properties.Resources.imgSalir;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -272,7 +273,7 @@
             // 
             this.mrcBuscar.Controls.Add(this.btnBuscar);
             this.mrcBuscar.Controls.Add(this.txtBuscar);
-            this.mrcBuscar.Location = new System.Drawing.Point(295, 53);
+            this.mrcBuscar.Location = new System.Drawing.Point(291, 83);
             this.mrcBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.mrcBuscar.Name = "mrcBuscar";
             this.mrcBuscar.Padding = new System.Windows.Forms.Padding(4);
@@ -307,7 +308,7 @@
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Salmon;
             this.btnCancelar.Image = global::PryConexiónBD.Properties.Resources.imgCancelar;
-            this.btnCancelar.Location = new System.Drawing.Point(756, 65);
+            this.btnCancelar.Location = new System.Drawing.Point(752, 95);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(55, 45);
             this.btnCancelar.TabIndex = 10;
@@ -318,7 +319,7 @@
             // 
             this.btnVolver.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnVolver.Image = global::PryConexiónBD.Properties.Resources.imgVolver;
-            this.btnVolver.Location = new System.Drawing.Point(695, 65);
+            this.btnVolver.Location = new System.Drawing.Point(691, 95);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(55, 45);
             this.btnVolver.TabIndex = 9;
@@ -329,11 +330,22 @@
             // 
             this.epValidacion.ContainerControl = this;
             // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.Location = new System.Drawing.Point(767, 38);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(25, 22);
+            this.lblUsuario.TabIndex = 11;
+            this.lblUsuario.Text = "...";
+            // 
             // frmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 628);
+            this.ClientSize = new System.Drawing.Size(923, 653);
+            this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.mrcBuscar);
@@ -389,6 +401,7 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.ErrorProvider epValidacion;
+        private System.Windows.Forms.Label lblUsuario;
     }
 }
 

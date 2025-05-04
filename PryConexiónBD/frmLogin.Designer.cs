@@ -66,7 +66,6 @@
             // 
             this.txtContraseña.Location = new System.Drawing.Point(92, 86);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(170, 20);
             this.txtContraseña.TabIndex = 3;
             // 
@@ -97,6 +96,7 @@
             this.btnOcultar.Size = new System.Drawing.Size(26, 23);
             this.btnOcultar.TabIndex = 6;
             this.btnOcultar.UseVisualStyleBackColor = true;
+            this.btnOcultar.Click += new System.EventHandler(this.btnOcultar_Click);
             // 
             // frmLogin
             // 
@@ -113,6 +113,7 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio Sesion";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
