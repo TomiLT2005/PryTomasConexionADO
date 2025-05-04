@@ -36,9 +36,6 @@ namespace pryGestionInventario
                 nombreBaseDeDatos = conexion.Database;
 
                 conexion.Open();
-
-                MessageBox.Show("Conectado a la base de datos: '" + nombreBaseDeDatos + "'.", "Conexión exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             catch (Exception error)
             {
@@ -52,12 +49,12 @@ namespace pryGestionInventario
         {
             try
             {
-                using (SqlConnection conexion = new SqlConnection (cadena))
+                using (SqlConnection conexion = new SqlConnection(cadena))
                 {
                     conexion.Open();
                     string query = "SELECT * FROM Productos";
 
-                    SqlCommand comando = new SqlCommand(query,conexion);
+                    SqlCommand comando = new SqlCommand(query, conexion);
                     SqlDataAdapter adaptador = new SqlDataAdapter(comando);
 
                     DataTable tabla = new DataTable();
@@ -70,7 +67,7 @@ namespace pryGestionInventario
             {
                 MessageBox.Show("No se pudieron cargar los productos correctamente. Revise su conexión o intente más tarde.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
         }
 
         public void Cargarcategorias(ComboBox Combo)
@@ -100,7 +97,7 @@ namespace pryGestionInventario
             }
         }
 
-        public void Agregar(clsProducto producto ) 
+        public void Agregar(clsProducto producto)
         {
             try
             {
@@ -160,7 +157,7 @@ namespace pryGestionInventario
             }
         }
 
-        public void Eliminar(int codigo) 
+        public void Eliminar(int codigo)
         {
             try
             {
@@ -184,11 +181,11 @@ namespace pryGestionInventario
             }
         }
 
-        public void BuscarporNombre(DataGridView Grilla, string nombreProducto) 
+        public void BuscarporNombre(DataGridView Grilla, string nombreProducto)
         {
             try
             {
-                using (SqlConnection conexion = new SqlConnection(cadena)) 
+                using (SqlConnection conexion = new SqlConnection(cadena))
                 {
                     conexion.Open();
                     string query = "SELECT * FROM Productos WHERE Nombre LIKE @nombre";
@@ -206,7 +203,7 @@ namespace pryGestionInventario
                     }
                     else
                     {
-                        Grilla.DataSource = tabla; 
+                        Grilla.DataSource = tabla;
                     }
                 }
             }
@@ -215,7 +212,54 @@ namespace pryGestionInventario
                 MessageBox.Show("Error al buscar productos: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            //PRUEBA//
         }
+
+        public bool verificarLogin(clsUsuario usuario)
+        {
+            bool loginExitoso = false;
+
+            try
+            {
+                using (SqlConnection conexion = new SqlConnection(cadena))
+                {
+                    conexion.Open();
+                    string query = "SELECT Id, EstadoId, IntentosFallidos FROM Usuarios WHERE Nombre = @Nombre AND Contraseña = @Contraseña";
+
+                    SqlCommand comando = new SqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                    comando.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+
+                    SqlDataReader lector = comando.ExecuteReader();
+
+                    if (lector.Read())
+                    {
+                        usuario.Id = Convert.ToInt32(lector["Id"]);
+                        usuario.EstadoId = Convert.ToInt32(lector["EstadoId"]);
+                        usuario.IntentosFallidos = Convert.ToInt32(lector["IntentosFallidos"]);
+
+                        if (usuario.EstadoId == 1)
+                        {
+                            loginExitoso = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cuenta bloqueada.");
+                            loginExitoso = false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Datos Incorrectos.");
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error al verificar el login: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return loginExitoso;
+        }
+
     }
 }

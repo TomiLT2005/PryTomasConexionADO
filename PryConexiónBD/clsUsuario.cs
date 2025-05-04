@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PryConexiónBD
+{
+    public class clsUsuario
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Contraseña { get; set; }
+
+        public clsUsuario(int Id, string Nombre, string Contraseña)
+        {
+            this.Id = Id;
+            this.Nombre = Nombre;
+            this.Contraseña = Contraseña;
+        }
+    }
+}
