@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icoLoco.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -149,6 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\imgOjoCerrado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carrito-de-compras.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icoLoco.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

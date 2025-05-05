@@ -32,11 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicio));
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.mrcProducto = new System.Windows.Forms.GroupBox();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.lblCategoria = new System.Windows.Forms.Label();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.numStock = new System.Windows.Forms.NumericUpDown();
             this.lblStock = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
@@ -45,20 +42,23 @@
             this.lblDesc = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.msMenu = new System.Windows.Forms.MenuStrip();
             this.mrcBuscar = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnVolver = new System.Windows.Forms.Button();
             this.epValidacion = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblUsuario = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.miMenuHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.miMenuSalir = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.mrcProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.msMenu.SuspendLayout();
             this.mrcBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epValidacion)).BeginInit();
             this.SuspendLayout();
@@ -99,36 +99,6 @@
             this.mrcProducto.TabIndex = 4;
             this.mrcProducto.TabStop = false;
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Image = global::PryConexiónBD.Properties.Resources.imgEliminar;
-            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(19, 462);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(211, 43);
-            this.btnEliminar.TabIndex = 12;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Enabled = false;
-            this.btnModificar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Image = global::PryConexiónBD.Properties.Resources.ImgModificar;
-            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(19, 411);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(211, 43);
-            this.btnModificar.TabIndex = 11;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
             // cmbCategoria
             // 
             this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -149,20 +119,6 @@
             this.lblCategoria.Size = new System.Drawing.Size(60, 16);
             this.lblCategoria.TabIndex = 10;
             this.lblCategoria.Text = "Categoria:";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(19, 356);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(211, 41);
-            this.btnAgregar.TabIndex = 1;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // numStock
             // 
@@ -243,31 +199,15 @@
             this.lblNombre.TabIndex = 3;
             this.lblNombre.Text = "Nombre:";
             // 
-            // menuStrip1
+            // msMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.homeToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(923, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // homeToolStripMenuItem
-            // 
-            this.homeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salirToolStripMenuItem});
-            this.homeToolStripMenuItem.Image = global::PryConexiónBD.Properties.Resources.imgHome;
-            this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Image = global::PryConexiónBD.Properties.Resources.imgSalir;
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miMenuHome});
+            this.msMenu.Location = new System.Drawing.Point(0, 0);
+            this.msMenu.Name = "msMenu";
+            this.msMenu.Size = new System.Drawing.Size(923, 40);
+            this.msMenu.TabIndex = 6;
+            this.msMenu.Text = "menuStrip1";
             // 
             // mrcBuscar
             // 
@@ -282,19 +222,6 @@
             this.mrcBuscar.TabStop = false;
             this.mrcBuscar.Text = "Buscar Producto";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::PryConexiónBD.Properties.Resources.ImgBuscar;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(215, 20);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(144, 28);
-            this.btnBuscar.TabIndex = 1;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // txtBuscar
             // 
             this.txtBuscar.Location = new System.Drawing.Point(7, 23);
@@ -303,6 +230,20 @@
             this.txtBuscar.Size = new System.Drawing.Size(200, 22);
             this.txtBuscar.TabIndex = 0;
             this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
+            // 
+            // epValidacion
+            // 
+            this.epValidacion.ContainerControl = this;
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.Location = new System.Drawing.Point(764, 52);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(25, 22);
+            this.lblUsuario.TabIndex = 11;
+            this.lblUsuario.Text = "...";
             // 
             // btnCancelar
             // 
@@ -326,19 +267,80 @@
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // epValidacion
+            // btnBuscar
             // 
-            this.epValidacion.ContainerControl = this;
+            this.btnBuscar.Image = global::PryConexiónBD.Properties.Resources.ImgBuscar;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(215, 20);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(144, 28);
+            this.btnBuscar.TabIndex = 1;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // lblUsuario
+            // btnEliminar
             // 
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuario.Location = new System.Drawing.Point(767, 38);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(25, 22);
-            this.lblUsuario.TabIndex = 11;
-            this.lblUsuario.Text = "...";
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Image = global::PryConexiónBD.Properties.Resources.imgEliminar;
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEliminar.Location = new System.Drawing.Point(19, 462);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(211, 43);
+            this.btnEliminar.TabIndex = 12;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Enabled = false;
+            this.btnModificar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.Image = global::PryConexiónBD.Properties.Resources.ImgModificar;
+            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModificar.Location = new System.Drawing.Point(19, 411);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(211, 43);
+            this.btnModificar.TabIndex = 11;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(19, 356);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(211, 41);
+            this.btnAgregar.TabIndex = 1;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // miMenuHome
+            // 
+            this.miMenuHome.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miMenuSalir});
+            this.miMenuHome.Image = global::PryConexiónBD.Properties.Resources.imgHome;
+            this.miMenuHome.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.miMenuHome.Name = "miMenuHome";
+            this.miMenuHome.Size = new System.Drawing.Size(44, 36);
+            // 
+            // miMenuSalir
+            // 
+            this.miMenuSalir.Image = global::PryConexiónBD.Properties.Resources.imgSalir;
+            this.miMenuSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.miMenuSalir.Name = "miMenuSalir";
+            this.miMenuSalir.Size = new System.Drawing.Size(188, 30);
+            this.miMenuSalir.Text = "Salir";
+            this.miMenuSalir.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // frmInicio
             // 
@@ -351,10 +353,11 @@
             this.Controls.Add(this.mrcBuscar);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.mrcProducto);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.msMenu);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.msMenu;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -365,8 +368,8 @@
             this.mrcProducto.ResumeLayout(false);
             this.mrcProducto.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.msMenu.ResumeLayout(false);
+            this.msMenu.PerformLayout();
             this.mrcBuscar.ResumeLayout(false);
             this.mrcBuscar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epValidacion)).EndInit();
@@ -392,9 +395,9 @@
         private System.Windows.Forms.Label lblDesc;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip msMenu;
+        private System.Windows.Forms.ToolStripMenuItem miMenuHome;
+        private System.Windows.Forms.ToolStripMenuItem miMenuSalir;
         private System.Windows.Forms.GroupBox mrcBuscar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtBuscar;

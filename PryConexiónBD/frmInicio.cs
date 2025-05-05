@@ -51,13 +51,13 @@ namespace PryConexiónBD
 
             if (res == DialogResult.Yes)
             {
-                this.Close();
+                Application.Exit();
             }
         }
 
 
 
-        //Eventos de Botones (Agregar,Modificar, Eliminar y Buscar)//
+        //Eventos de Botones Primarios (Agregar,Modificar y Eliminar)//
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (validarCampos()) 
