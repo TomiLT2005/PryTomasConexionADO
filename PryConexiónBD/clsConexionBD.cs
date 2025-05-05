@@ -14,20 +14,19 @@ namespace pryGestionInventario
 {
     internal class clsConexionBD
     {
-        //cadena de conexion
+        //cadena de conexión
         string cadena = "Server = localhost\\SQLEXPRESS;Database=Comercio;Trusted_Connection=True;";
 
-        //"Server=localhost;Database=Ventas2;Trusted_Connection=True;";//
+        //"Server=localhost;Database=Comercio;Trusted_Connection=True;";//
 
-        //conector
         SqlConnection conexion;
 
-        //comando
         SqlCommand comando;
 
         public string nombreBaseDeDatos;
 
 
+        //Conexión
         public void ConectarBD()
         {
             try
@@ -40,12 +39,13 @@ namespace pryGestionInventario
             }
             catch (Exception error)
             {
-                MessageBox.Show("Ups... algo salió mal al intentar conectar con la base de datos. Por favor, revise su conexión e intente nuevamente.", "Conexión fallida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ups... algo salió mal al intentar conectar con la base de datos. Por favor, revise su conexión e intente nuevamente. Detalles del error: {error.Message}", "Conexión fallida", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
 
+        //Listar
         public void ListarBD(DataGridView Grilla)
         {
             try
@@ -66,11 +66,13 @@ namespace pryGestionInventario
             }
             catch (Exception error)
             {
-                MessageBox.Show("No se pudieron cargar los productos correctamente. Revise su conexión o intente más tarde.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No se pudieron cargar los productos correctamente. Revise su conexión o intente más tarde. Detalles del error: {error.Message}", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
+
+        //Cargar categorías
         public void Cargarcategorias(ComboBox Combo)
         {
             try
@@ -98,6 +100,8 @@ namespace pryGestionInventario
             }
         }
 
+
+        //Agregar
         public void Agregar(clsProducto producto)
         {
             try
@@ -128,6 +132,7 @@ namespace pryGestionInventario
         }
 
 
+        //Modificar
         public void Modificar(clsProducto producto)
         {
             try
@@ -158,6 +163,8 @@ namespace pryGestionInventario
             }
         }
 
+
+        //Eliminar
         public void Eliminar(int codigo)
         {
             try
@@ -182,6 +189,8 @@ namespace pryGestionInventario
             }
         }
 
+
+        //Buscar por nombre
         public void BuscarporNombre(DataGridView Grilla, string nombreProducto)
         {
             try
@@ -216,6 +225,7 @@ namespace pryGestionInventario
         }
 
 
+        //Verificar usuario
         public bool verificarUsuario(clsUsuario usuario)
         {
             bool loginExitoso = false;
@@ -251,6 +261,5 @@ namespace pryGestionInventario
 
             return loginExitoso;
         }
-
     }
 }

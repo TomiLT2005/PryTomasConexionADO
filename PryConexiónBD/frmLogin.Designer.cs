@@ -98,7 +98,7 @@
             // 
             // btnOcultar
             // 
-            this.btnOcultar.Location = new System.Drawing.Point(313, 113);
+            this.btnOcultar.Location = new System.Drawing.Point(313, 109);
             this.btnOcultar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOcultar.Name = "btnOcultar";
             this.btnOcultar.Size = new System.Drawing.Size(30, 30);

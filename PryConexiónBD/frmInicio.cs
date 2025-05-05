@@ -16,19 +16,19 @@ namespace PryConexiónBD
         public frmInicio(string nombreUsuario)
         {
             InitializeComponent();
+
             lblUsuario.Text = "Hola, " + nombreUsuario + "!";
         }
 
-        //Instancias de clases//
+
         clsConexionBD conexion = new clsConexionBD();
-        clsControles controles = new clsControles();
 
 
-        //Variable para guardar el codigo seleccionado//
+        //Variable para guardar el código seleccionado
         public int codigoSeleccionado = 0;
 
 
-        //Evento de carga del formulario//
+        //Evento de carga del formulario
         private void frmInicio_Load(object sender, EventArgs e)
         {
             conexion.ConectarBD();
@@ -37,16 +37,19 @@ namespace PryConexiónBD
 
         }
 
-        //Evento para que haga foco en el txtNombre al abrir el formulario//
+
+
+        //Evento para que haga foco en el txtNombre al abrir el formulario
         private void frmInicio_Shown(object sender, EventArgs e)
         {
             txtNombre.Focus();
         }
 
-        //Evento para salir del Sistema//
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
+
+        //Evento para salir del Sistema
+        private void miMenuSalir_Click(object sender, EventArgs e)
+        {
             DialogResult res = MessageBox.Show("¿Estás seguro de que deseas salir?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (res == DialogResult.Yes)
@@ -57,7 +60,7 @@ namespace PryConexiónBD
 
 
 
-        //Eventos de Botones Primarios (Agregar,Modificar y Eliminar)//
+        //Eventos de Botones Primarios (Agregar, Modificar y Eliminar)
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (validarCampos()) 
@@ -74,7 +77,7 @@ namespace PryConexiónBD
                 conexion.Agregar(nuevoproducto);
                 conexion.ListarBD(dgvDatos);
 
-                controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+                LimpiarCampos();
                 btnModificar.Enabled = true;
                 btnEliminar.Enabled = true;
             }
@@ -83,6 +86,7 @@ namespace PryConexiónBD
                 MessageBox.Show("Por favor, complete todos los campos requeridos.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -98,7 +102,7 @@ namespace PryConexiónBD
                 conexion.Modificar(modificado);
                 conexion.ListarBD(dgvDatos);
 
-                controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+                LimpiarCampos();
                 codigoSeleccionado = 0;
             }
             else 
@@ -106,6 +110,7 @@ namespace PryConexiónBD
                 MessageBox.Show("Por favor, complete todos los campos requeridos.", "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -116,11 +121,14 @@ namespace PryConexiónBD
                 conexion.Eliminar(codigoSeleccionado);
                 conexion.ListarBD(dgvDatos);
 
-                controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+                LimpiarCampos();
                 codigoSeleccionado = 0;
             }
         }
 
+
+
+        //Eventos de Botones Secundarios (Buscar, Volver y Cancelar)
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string busqueda = txtBuscar.Text;
@@ -129,15 +137,17 @@ namespace PryConexiónBD
             txtBuscar.Clear();
         }
 
+
         private void btnVolver_Click(object sender, EventArgs e)
         {
             conexion.ListarBD(dgvDatos);
-            controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+            LimpiarCampos();
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            controles.LimpiarCampos(txtNombre, txtDesc, txtPrecio, numStock, cmbCategoria);
+            LimpiarCampos();
 
             txtNombre.Focus();
             conexion.ListarBD(dgvDatos);
@@ -148,6 +158,8 @@ namespace PryConexiónBD
         }
 
 
+
+        //Método para obtener el valor de la fila seleccionada
         private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs f)
         {
             if (f.RowIndex >= 0)
@@ -168,10 +180,10 @@ namespace PryConexiónBD
             }
         }
 
-        //-------------------------------------------------*
+        
 
 
-        //Controles - Ingreso de Datos//
+        //Controles (Ingreso de Datos, Validación y Limpiar)
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && !char.IsControl(e.KeyChar))
@@ -250,7 +262,17 @@ namespace PryConexiónBD
             }
 
             return true; //esta todo correcto//
+        }
 
+
+
+        private void LimpiarCampos() 
+        {
+            txtNombre.Text = "";
+            txtDesc.Text = "";
+            txtPrecio.Text = "";
+            numStock.Value = 0;
+            cmbCategoria.SelectedIndex = -1;
         }
     }
 }

@@ -19,14 +19,20 @@ namespace PryConexiónBD
         }
 
         clsConexionBD conexion = new clsConexionBD();
+
+        //Variable para guardar el número de intentos
         int intentos = 3;
 
+
+        //Evento de carga del formulario
         private void frmLogin_Load(object sender, EventArgs e)
         {
             txtContraseña.PasswordChar = '*';
             btnOcultar.Image = Properties.Resources.imgOjoCerrado;
         }
 
+
+        //Evento Controles Principales (Ingresa y Cancelar)
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUsuario.Text) || string.IsNullOrWhiteSpace(txtContraseña.Text))
@@ -65,6 +71,8 @@ namespace PryConexiónBD
             this.Close();
         }
 
+
+        //Evento Ocultar y Mostrar Contraseña
         private void btnOcultar_Click(object sender, EventArgs e)
         {
             if (txtContraseña.PasswordChar == '*')

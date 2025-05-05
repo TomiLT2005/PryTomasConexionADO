@@ -340,7 +340,7 @@
             this.miMenuSalir.Name = "miMenuSalir";
             this.miMenuSalir.Size = new System.Drawing.Size(188, 30);
             this.miMenuSalir.Text = "Salir";
-            this.miMenuSalir.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            this.miMenuSalir.Click += new System.EventHandler(this.miMenuSalir_Click);
             // 
             // frmInicio
             // 
